@@ -1,8 +1,16 @@
-console.log("chrome extension go")
+// Movie URL of the IMDb Website
+let movie_url = window.location.href
 
-// let movie = document.getElementsByClassName("PZPZlf ssJ7i B5dxMB")
-// let movie = document.querySelectorAll("[class*='yuRUbf']")
+let movie_name = document.querySelector('.sc-7f1a92f5-1.benbRT').textContent
+let num_reviews = document.querySelector('.sc-bde20123-3.gPVQxL').textContent
 
-document.addEventListener("DOMContentLoaded", function(e) {
-    console.log(document.querySelectorAll('a'))
-})
+let message = {
+    url: movie_url,
+    name: movie_name,
+    review: num_reviews
+}
+
+chrome.runtime.sendMessage(message)
+
+
+// alert([movie_url])

@@ -1,37 +1,40 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="../sentiment_analysis.py" /> 
+    <!-- <script defer src="https://pyscript.net/latest/pyscript.js"></script> -->
+    <!-- <link rel="stylesheet" type="text/css" href="../sentiment_analysis.py" />  -->
     <h1>Movie Rating</h1>
 </head>
 
 <body>
-    <main>
 
-        <div class="container">
-            <div>
-                <h2 class="tags">Movie Name</h1>
-            </div>
-            
-            <div>
-                <h2 class="tags">Number of Reviews from IMDB</h2>
-            </div>
-            
-            <div>
-                <h2 class="tags">Our Rating</h2>
-            </div>
-        </div>
+    <div class="container">
+        <button id="generate">Generate Movie Rating </button>
+        
+        <h3 id="movie-h"></h3>
+        <p id="movie-name"></p>
 
-    </main>
+        <h3 id="review-h"></h3>
+        <p id="num-reviews"></p>
+    </div>
 
-    <section class="pyscript">
-        <py-script src="./main.py"></py-script>
-    </section>
+    <script src="./popup.js"></script>
 
-    <script src="./chrome.js"></script>
 
+    <!-- <script>
+
+        let bgpage = chrome.extension.getBackgroundPage();
+        let movie_name = bgpage.movie_name
+
+        console.log(movie_name)
+
+    </script> -->
+
+    <!-- <section class="pyscript">
+
+        <py-script src="../sentiment_analysis.py"></py-script>
+
+    </section> -->
 </body>
 
 </html>

@@ -1,15 +1,18 @@
 {
-  "name": "movie-rating-extension",
+  "name": "Movie Rating Extension",
   "version": "0.1.0",
   "description": "Chrome extension that provides movie ratings according to sentiment analysis of viewer ratings.",
   "manifest_version": 2,
   "content_scripts": [{
-    "matches": [
-      "<all_urls>"
-    ],
+    "matches": ["https://www.imdb.com/title/*"],
     "js": ["chrome.js"]
   }],
+  "background": {
+    "scripts": ["background.js"]
+  },
   "browser_action": {
-    "default_popup": "movie_rating.html"
-  }
+    "default_popup": "movie_rating.html",
+    "default_title": "Get Movie Review"
+  },
+  "content_security_policy":"script-src 'self' https://apis.google.com; object-src 'self'"
 }
