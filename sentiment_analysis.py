@@ -2,37 +2,52 @@ import requests
 from bs4 import BeautifulSoup
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
+import json
 
 unwanted = nltk.corpus.stopwords.words("english")
 unwanted.extend([w.lower() for w in nltk.corpus.names.words()])
 
 
-def get_reviews(url):
+def get_reviews(movie_id, review_amount):
+    url = 'https://www.imdb.com/title/' + movie_id + '/reviews/_ajax?ref_=undefined&paginationKey={}'
+    key = ''
     movie_reviews = []
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-
-    reviews = soup.find_all('div', class_='text show-more__control')
-    for review in reviews:
-        print(review.get_text())
-        movie_reviews.append(review.get_text())
+    while True:
+        response = requests.get(url.format(key))
+        soup = BeautifulSoup(response.text, 'html.parser')
+        pagination_key = soup.find("div", class_="load-more-data")
+        if not pagination_key:
+            break
+        key = pagination_key["data-key"]
+        for title, review in zip(soup.find_all(class_="title"), soup.find_all(class_="text show-more__control")):
+            movie_reviews.append({'title': title.get_text(), 'review': review.get_text()})
+        if len(movie_reviews) > review_amount:
+            break
     return movie_reviews
 
 
-def get_movie_sentiments(text_reviews):
+def get_movie_sentiments(movie_reviews):
     mean_compound = 0
     positive_reviews = []
+    neutral_reviews = []
     negative_reviews = []
     sia = SentimentIntensityAnalyzer()
-    for text_review in text_reviews:
-        sentiment = sia.polarity_scores(text_review)
-        mean_compound = mean_compound + sentiment["compound"]
-        if sentiment["compound"] > 0:
-            positive_reviews.append(text_review)
+    for review_dict in movie_reviews:
+        title = review_dict.get('title')
+        review = review_dict.get('review')
+        title_sentiment = sia.polarity_scores(title)
+        first_sentence_sentiment = sia.polarity_scores(review.partition('.')[0])
+        review_sentiment = sia.polarity_scores(title)
+        compound = title_sentiment["compound"] * 0.5 + first_sentence_sentiment["compound"] * 0.3 + review_sentiment["compound"] * 0.2
+        mean_compound = mean_compound + compound
+        if compound > 0.15:
+            positive_reviews.append(review)
+        elif compound < -0.15:
+            negative_reviews.append(review)
         else:
-            negative_reviews.append(text_review)
-    mean_compound = mean_compound / (1.0 * len(text_reviews))
-    return mean_compound, positive_reviews, negative_reviews
+            neutral_reviews.append(review)
+    mean_compound = mean_compound / (1.0 * len(movie_reviews))
+    return mean_compound, positive_reviews, negative_reviews, neutral_reviews
 
 
 def skip_unwanted(pos_tuple):
@@ -70,7 +85,6 @@ def get_words(positive_reviews, negative_reviews):
 
     sia = SentimentIntensityAnalyzer()
 
-    #TODO - need to adjust thresholds to output how many words for each sentiment
     positive_words_output = []
     for word in top_100_positive:
         sentiment_score = sia.polarity_scores(word)
@@ -82,12 +96,27 @@ def get_words(positive_reviews, negative_reviews):
         sentiment_score = sia.polarity_scores(word)
         if sentiment_score['compound'] < -0.30:
             negative_words_output.append(word)
-    return positive_words_output, negative_words_output
+    return positive_words_output[:5], negative_words_output[:5]
+
+
+def transpose_score(score):
+    return (score + 0.5) * 10
+
+
+def analyze_movie(movie_id, num_reviews):
+    movie_reviews = get_reviews(movie_id, num_reviews)
+    score, positive_reviews, negative_reviews, neutral_reviews = get_movie_sentiments(movie_reviews)
+    positive_words, negative_words = get_words(positive_reviews, negative_reviews)
+    json_string = {
+        "score": transpose_score(score),
+        "num_positive_reviews": len(positive_reviews),
+        "num_neutral_reviews": len(neutral_reviews),
+        "num_negative_reviews": len(negative_reviews),
+        "positive_words": positive_words,
+        "negative_words": negative_words
+    }
+    return json.dumps(json_string)
 
 
 if __name__ == '__main__':
-    # sample URL, we should move this to another method for us to call in the pyscript
-    url = 'https://www.imdb.com/title/tt0111161/reviews'
-    movie_reviews = get_reviews(url)
-    score, positive_reviews, negative_reviews = get_movie_sentiments(movie_reviews)
-    positive_words, negative_words = get_words(positive_reviews, negative_reviews)
+    json = analyze_movie('tt0111161', 100)
