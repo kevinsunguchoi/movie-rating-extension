@@ -38,8 +38,10 @@ def get_movie_sentiments(movie_reviews):
         title_sentiment = sia.polarity_scores(title)
         first_sentence_sentiment = sia.polarity_scores(review.partition('.')[0])
         review_sentiment = sia.polarity_scores(title)
+        # Formula for the score is weighted by the title, first sentence, and the entire review
         compound = title_sentiment["compound"] * 0.5 + first_sentence_sentiment["compound"] * 0.3 + review_sentiment["compound"] * 0.2
         mean_compound = mean_compound + compound
+        # As compound can be from [-0.5, 0.5], if the score falls between the middle 30%, it will be considered as a neutral review
         if compound > 0.15:
             positive_reviews.append(review)
         elif compound < -0.15:
@@ -52,6 +54,7 @@ def get_movie_sentiments(movie_reviews):
 
 def skip_unwanted(pos_tuple):
     word, tag = pos_tuple
+    # Omits stopwords and non-alphabet words
     if not word.isalpha() or word.lower() in unwanted:
         return False
     if tag.startswith("NN"):
