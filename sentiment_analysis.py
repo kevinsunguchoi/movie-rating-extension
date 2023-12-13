@@ -21,8 +21,8 @@ def get_reviews(movie_id, review_amount):
         key = pagination_key["data-key"]
         for title, review in zip(soup.find_all(class_="title"), soup.find_all(class_="text show-more__control")):
             movie_reviews.append({'title': title.get_text(), 'review': review.get_text()})
-        if len(movie_reviews) > review_amount:
-            break
+            if len(movie_reviews) == review_amount:
+                return movie_reviews
     return movie_reviews
 
 
