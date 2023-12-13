@@ -1,6 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
 import nltk
+
+# For running the backend locally for the first time, these are needed
+nltk.download('stopwords')
+nltk.download('names')
+nltk.download('vader_lexicon')
+nltk.download('averaged_perceptron_tagger')
+
 from nltk.sentiment import SentimentIntensityAnalyzer
 import json
 

@@ -10,9 +10,15 @@ app.secret_key = "cs410-final-project-chrome-extension"
 
 def index():
 
+    # Initialize session keys if they don't exist
+    session.setdefault('movie_id', None)
+    session.setdefault('reviews', None)
+
+    # Receive session from /process_data
     movie_id = session['movie_id']
     reviews = session['reviews']
 
+    # Object received from sentiment_analysis.py script
     movie_sentiment = json.loads(analyze_movie(movie_id, int(reviews)))
 
     return movie_sentiment
@@ -21,9 +27,11 @@ def index():
 
 def process_data():
 
+    # Receive movie_id and reviews from javascript frontend
     data = request.get_json()
     movie_id, reviews = data
 
+    # Record the movie_id and reviews into session variable
     session['movie_id'] = movie_id
     session['reviews'] = reviews
 
