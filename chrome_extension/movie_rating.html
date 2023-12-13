@@ -1,40 +1,71 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <!-- <script defer src="https://pyscript.net/latest/pyscript.js"></script> -->
-    <!-- <link rel="stylesheet" type="text/css" href="../sentiment_analysis.py" />  -->
-    <h1>Movie Rating</h1>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Review Template</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="popup.js" defer></script>
 </head>
 
-<body>
+<body id="main-container">
 
-    <div class="container">
-        <button id="generate">Generate Movie Rating </button>
-        
-        <h3 id="movie-h"></h3>
-        <p id="movie-name"></p>
+    <div id="imdb">
+        <header id="header-container">
+            <h1>IMDB Movie Review</h1>
+            <h2>Sentiment Analysis</h2>
+        </header>
 
-        <h3 id="review-h"></h3>
-        <p id="num-reviews"></p>
+        <div class="title-section">
+            <h2 id="movie-name-h">Movie Name</h2>
+            <p id="movie-name-v"> </p>
+        </div>
+
+        <div class="user-input">
+            <label for="reviews">Reviews:</label>
+            <input type="range" id="reviews" value="25" min="1" max="250">
+            <output id="reviews-output">25</output>
+        </div>
+
+        <main>
+            <div class="row1">
+                <div class="section1">
+                    <h3>Positive Words</h3>
+                    <ol id="positive-words">
+                    </ol>
+                </div>
+
+                <div class="section1">
+                    <h3>Negative Words</h3>
+                    <ol id="negative-words">
+                    </ol>
+                </div>
+            </div>
+
+            <div class="row2">
+                <div class="section2">
+                    <h3>Positive Reviews</h3>
+                    <h3 id="positive-reviews">0</h3>
+                </div>
+
+                <div class="section2">
+                    <h3>Neutral Reviews</h3>
+                    <h3 id="neutral-reviews">0</h3>
+                </div>
+
+                <div class="section2">
+                    <h3>Negative Reviews</h3>
+                    <h3 id="negative-reviews">0</h3>
+                </div>
+            </div>
+        </main>
+
+        <div class="rating-section">
+            <h3>Sentiment Analysis Rating</h3>
+            <h2 id="sentiment-score">- / 10</h2>
+            <button class="button-1" id="generate">Generate Movie Rating</button>
+        </div>
     </div>
 
-    <script src="./popup.js"></script>
-
-
-    <!-- <script>
-
-        let bgpage = chrome.extension.getBackgroundPage();
-        let movie_name = bgpage.movie_name
-
-        console.log(movie_name)
-
-    </script> -->
-
-    <!-- <section class="pyscript">
-
-        <py-script src="../sentiment_analysis.py"></py-script>
-
-    </section> -->
 </body>
-
 </html>
