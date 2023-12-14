@@ -1,3 +1,8 @@
+// Initialize local backend url for Flask app
+var backend_url = "http://127.0.0.1:5001/" // Change this variable to match the local url the Flask app runs on
+var backend_post_url = backend_url + "process_data"
+
+// Variable for movie id
 var movie_id = ""
 
 function getMovieInfo() {
@@ -39,7 +44,7 @@ async function sendMovieUrl(id) {
     let movie_info = [id, reviews]
 
     try {
-        const response = await fetch("http://127.0.0.1:5000/process_data", {
+        const response = await fetch(backend_post_url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -66,7 +71,7 @@ async function sendMovieUrl(id) {
 }
 
 function getData() {
-    return fetch("http://127.0.0.1:5000/")
+    return fetch(backend_url)
     .then(response => response.json())
     .then(data => {
         // Set the score and the number of positive, neutral, and negative words

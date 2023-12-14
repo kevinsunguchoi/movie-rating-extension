@@ -1,7 +1,7 @@
 {
   "name": "Movie Rating Extension",
   "version": "0.1.0",
-  "description": "Chrome extension that provides movie ratings according to sentiment analysis of viewer ratings.",
+  "description": "Chrome extension that provides movie ratings according to sentiment analysis of viewer reviews from IMDb.",
   "manifest_version": 2,
   "content_scripts": [{
     "matches": ["https://www.imdb.com/title/*"],
@@ -14,7 +14,7 @@
   },
   "permissions": [
     "tabs",
-    "http://127.0.0.1:5000/",
-    "http://127.0.0.1:5000/process_data"
+    "http://127.0.0.1:5001/",
+    "http://127.0.0.1:5001/process_data"
   ]
 }
