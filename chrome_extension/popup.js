@@ -32,6 +32,8 @@ function getMovieInfo() {
 }
 
 async function sendMovieUrl(id) {
+    document.getElementById('generate').textContent = 'Loading...'
+
     let reviews = String(document.getElementById('reviews-output').value)
 
     let movie_info = [id, reviews]
@@ -51,7 +53,12 @@ async function sendMovieUrl(id) {
         console.log('Result from server:', result);
 
         // After sendMovieUrl is complete, call getData
-        getData();
+        getData().then(() => {
+            document.getElementById('generate').textContent = "Generate Movie Rating"
+            document.getElementById('generate').style.backgroundColor = "#EA4C89"
+        });
+
+        
 
     } catch (error) {
         console.error('Error:', error);
@@ -59,7 +66,7 @@ async function sendMovieUrl(id) {
 }
 
 function getData() {
-    fetch("http://127.0.0.1:5000/")
+    return fetch("http://127.0.0.1:5000/")
     .then(response => response.json())
     .then(data => {
         // Set the score and the number of positive, neutral, and negative words
@@ -100,6 +107,7 @@ function getData() {
     .catch(error => {
         console.error('Error:', error);
     });
+
 }
 
 //// Run when chrome extension opens

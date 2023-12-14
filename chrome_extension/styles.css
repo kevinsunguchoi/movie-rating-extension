@@ -1,23 +1,53 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Helvetica, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f2efef;
 }
 
 header {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    min-width: 350px;
+    /* background-color: rgb(250, 180, 41); */
+    color: rgb(27, 27, 27);
+    /* text-align: center; */
+    min-width: 300px;
+    margin: 25px 20px 20px 20px;
+    font-family: Impact, fantasy;
+    /* box-shadow: 0 1px 3px 2px rgba(0, 0, 0, 0.251); */
+    display: flex;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 30px;
+    /* margin-top: 17px; */
+    /* margin: 12px 20px 0 20px; */
+    margin: 0;
+    width: fit-content;
+    padding: 5px 12px 5px 12px;
+    background-color: rgb(251, 185, 54);
+    border-radius: 5px;
+    /* padding: 12px 0 0 10px; */
+    /* border-bottom: 4px solid rgba(33, 33, 33, 0.904); */
+}
+
+header p {
+    font-family: "Arial Narrow";
+    color: rgb(27, 27, 27);
+    font-size: 16px;
+    width: 100%;
+    margin: 10px 10px 0 20px;
+    /* margin: 5px 0 20px 0; */
+    /* padding: 0 22px 0 22px; */
+    /* text-align: left; */
+    font-weight: 700;
 }
 
 #wrong-page {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #333;
-    color: #fff;
+    background-color: #f2efef;
+    color: #333;
     text-align: center;
     padding: 10px;
     min-width: 275px;
@@ -31,20 +61,64 @@ header {
 }
 
 main {
-    padding: 10px;
-    min-width: 350px; /* Set maximum width for the HTML page */
-    margin: 0 auto; /* Center the content */
+    /* padding: 10px; */
+    min-width: 300px; /* Set maximum width for the HTML page
+    /* margin: 12px 12px 12px 12px;
+    box-shadow: 0 1px 6px 2px rgba(0, 0, 0, 0.125); */
+    /* border-radius: 4px; */
+    /* background-color: #f9f9f9; */
+}
+
+.title-section {
+    text-align: center;
+    padding: 5px 10px 5px 10px;
+    margin: 10px 12px 10px 12px;
+    background-color: #f9f9f9;
+    box-shadow: 0 1px 6px 2px rgba(0, 0, 0, 0.125);
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.title-section h3 {
+    display: inline;
+}
+
+#movie-name-v {
+    font-size: 14px;
+    width: 70%;
+}
+
+#movie-name-h {
+    width: 30%;
+}
+
+.user-input {
+    text-align: center;
+    padding: 5px 0 10px 0;
+    margin: 10px 12px 10px 12px;
+    box-shadow: 0 1px 6px 2px rgba(0, 0, 0, 0.125);
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+#review-h {
+    font-weight: 700;
 }
 
 .row1 {
-    width: 100%; /* Full width for each row */
     display: flex;
     flex-wrap: wrap; /* Allow wrapping to new line */
     justify-content: space-evenly;
+    margin: 12px 12px 12px 12px;
+    padding: 10px 0 2px 0;
+    box-shadow: 0 1px 6px 2px rgba(0, 0, 0, 0.125);
+    background-color: #f9f9f9;
+    border-radius: 4px;
+
 }
 
 .row2 {
-    width: 100%; /* Full width for each row */
     display: flex;
     flex-wrap: wrap; /* Allow wrapping to new line */
     justify-content: space-evenly;
@@ -55,26 +129,16 @@ main {
     width: 40%; /* Adjusted to 30% each section */
 }
 
+.section1 h3 {
+    margin: 0;
+}
+
 .section2 {
     text-align: center;
     width: 25%; /* Adjusted to 30% each section */
-}
-
-.title-section {
-    text-align: center;
-    padding: 1px;
-    margin: auto;
-    background-color: #f2f2f2;
-}
-
-#movie-name-v {
-    font-size: 15px;
-}
-
-.user-input {
-    text-align: center;
-    margin: auto;
-    margin-top: 10px;
+    box-shadow: 0 1px 6px 2px rgba(0, 0, 0, 0.125);
+    background-color: #f9f9f9;
+    border-radius: 4px;
 }
 
 /* Style for positive and negative word lists */
@@ -88,10 +152,39 @@ main {
     margin: 0 5px;
 }
 
+#positive-reviews {
+    color: rgb(0, 138, 0);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#neutral-reviews {
+    color: rgb(254, 165, 0);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#negative-reviews {
+    color: rgb(223, 0, 0);
+    font-size: 20px;
+    font-weight: 700;
+}
+
 .rating-section {
     text-align: center;
     padding: 10px;
     background-color: #f2f2f2;
+}
+
+#sentiment-score {
+    font-size: 20px;
+    color: #333;
+    width: fit-content;
+    /* padding: 10px 10px 10px 10px; */
+    margin: 10px auto;
+    /* background-color: #f9f9f9; */
+    /* box-shadow: 0 1px 6px 2px rgba(0, 0, 0, 0.125);
+    border-radius: 4px; */
 }
 
 /* CSS */
@@ -123,9 +216,3 @@ main {
   margin-top: 5px;
   margin-bottom: 10px;
 }
-
-.button-1:hover,
-.button-1:focus {
-  background-color: #F082AC;
-}
-

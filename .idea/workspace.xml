@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2ed5d66c-63f9-480e-8ca0-d390169d3496" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chrome_extension/flask/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/chrome_extension/flask/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chrome_extension/flask/sentiment_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/chrome_extension/flask/sentiment_analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chrome_extension/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/chrome_extension/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
