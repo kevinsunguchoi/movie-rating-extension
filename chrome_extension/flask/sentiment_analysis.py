@@ -2,12 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 import nltk
 
-# For running the backend locally for the first time, these are needed
-nltk.download('stopwords')
-nltk.download('names')
-nltk.download('vader_lexicon')
-nltk.download('averaged_perceptron_tagger')
-
 from nltk.sentiment import SentimentIntensityAnalyzer
 import json
 
@@ -128,5 +122,9 @@ def analyze_movie(movie_id, num_reviews):
     return json.dumps(json_string)
 
 
+# NECESSARY TO DO WHEN RUNNING FOR THE FIRST TIME
 if __name__ == '__main__':
-    json = analyze_movie('tt0111161', 100)
+    nltk.download('stopwords')
+    nltk.download('names')
+    nltk.download('vader_lexicon')
+    nltk.download('averaged_perceptron_tagger')
